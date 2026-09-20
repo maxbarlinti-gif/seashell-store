@@ -50,21 +50,21 @@ export default function App() {
       <main>
         <section className="hero" id="home">
           <div className="hero-content">
-            <p className="eyebrow">HANDMADE • INSPIRED BY THE SEA</p>
+<p className="eyebrow">DISCOVER • SHOP • CONNECT</p>
 
-            <h1>
-              Natural beauty,
-              <br />
-              made by hand.
-            </h1>
+<h1>
+  Everything you need,
+  <br />
+  all in one place.
+</h1>
 
-            <p className="hero-text">
-              Discover unique handcrafted pieces inspired by the
-              colors, textures and timeless beauty of the ocean.
-            </p>
+<p className="hero-text">
+  Discover great products from trusted sellers — from electronics
+  and smartphones to food, drinks, snacks, fashion, crafts, and more.
+</p>
 
-            <a className="primary-button" href="#shop">
-              Explore Collection
+<a className="primary-button" href="#shop">
+  Explore Products
             </a>
           </div>
 
