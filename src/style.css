@@ -125,9 +125,20 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 48% 52% 44% 56%;
-  background: #d8c4a7;
-  box-shadow: 0 30px 70px rgba(45, 66, 63, 0.14);
+  overflow: hidden;
+  border-radius: 28px;
+  background: transparent;
+  box-shadow: 0 20px 50px rgba(45, 66, 63, 0.12);
+}
+
+.marketplace-hero-image {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 28px;
 }
 
 .shell {
