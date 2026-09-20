@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import marketplaceHero from './Everything You Need, All in One Place.png'
 const sampleProducts = [
   {
     id: 1,
@@ -68,9 +68,13 @@ export default function App() {
             </a>
           </div>
 
-          <div className="hero-art">
-            <div className="shell">🐚</div>
-          </div>
+         <div className="hero-art">
+  <img
+   src={marketplaceHero}
+    alt="Ardas Ong Marketplace products"
+    className="marketplace-hero-image"
+  />
+</div>
         </section>
 
         <section className="shop-section" id="shop">
