@@ -46,7 +46,7 @@ const categories = [
 ]
 export default function App() {
   const [cart, setCart] = useState([])
-
+const [selectedCategory, setSelectedCategory] = useState(null)
   const addToCart = (product) => {
     setCart((current) => [...current, product])
   }
@@ -103,37 +103,69 @@ export default function App() {
 </div>
         </section>
 
-        <section className="shop-section" id="shop">
-          <div className="section-heading">
-            <p className="eyebrow">OUR COLLECTION</p>
-            <h2>Made with nature in mind.</h2>
-            <p>
-              Each piece is carefully created to bring a little
-              piece of the coast into your world.
-            </p>
-          </div>
+<section className="shop-section" id="shop">
+  {!selectedCategory ? (
+    <>
+      <div className="section-heading">
+        <p className="eyebrow">SHOP BY CATEGORY</p>
+        <h2>Find what you need.</h2>
+        <p>
+          Explore our marketplace categories and discover products
+          for your everyday needs.
+        </p>
+      </div>
 
-          <div className="product-grid">
-{categories.map((category) => (
-  <article className="product-card" key={category.id}>
-    <div className="product-image">
-      <img src={category.image} alt={category.name} />
-    </div>
+      <div className="product-grid">
+        {categories.map((category) => (
+          <article className="product-card" key={category.id}>
+            <div className="product-image">
+              <img src={category.image} alt={category.name} />
+            </div>
 
-    <div className="product-info">
-      <h3>{category.name}</h3>
-      <p>{category.description}</p>
+            <div className="product-info">
+              <h3>{category.name}</h3>
+              <p>{category.description}</p>
 
-      <div className="product-bottom">
-        <button className="explore-category">
-          Explore Products →
-        </button>
+              <div className="product-bottom">
+                <button
+                  className="explore-category"
+                  onClick={() => setSelectedCategory(category.slug)}
+                >
+                  Explore Products →
+                </button>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </>
+  ) : (
+    <div className="category-view">
+      <button
+        className="back-category"
+        onClick={() => setSelectedCategory(null)}
+      >
+        ← Back to Categories
+      </button>
+
+      <div className="section-heading">
+        <p className="eyebrow">EXPLORE PRODUCTS</p>
+        <h2>
+          {categories.find(
+            (category) => category.slug === selectedCategory
+          )?.name}
+        </h2>
+        <p>
+          Discover products available in this category.
+        </p>
+      </div>
+
+      <div className="category-products-placeholder">
+        <p>Products in this category will appear here.</p>
       </div>
     </div>
-  </article>
-))}
-          </div>
-        </section>
+  )}
+</section>
 
         <section className="about-section" id="about">
           <div>
