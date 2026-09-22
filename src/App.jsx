@@ -1,53 +1,47 @@
 import React, { useState } from 'react'
 import marketplaceHero from './marketplace-products.png'
-const sampleProducts = [
+const categories = [
   {
     id: 1,
-    name: 'Wireless Headphones',
-    category: 'Electronics',
+    name: 'Electronics',
     image: '/products/electronics.png',
-    description: 'Comfortable wireless headphones for music, work, and everyday use.',
-    price: 49,
+    description: 'Headphones, laptops, cameras, gadgets, accessories & more.',
+    slug: 'electronics',
   },
   {
     id: 2,
-    name: 'Smartphone',
-    category: 'Smartphones',
+    name: 'Smartphones',
     image: '/products/smartphone.png',
-    description: 'Modern smartphone with a sleek design and essential everyday features.',
-    price: 299,
+    description: 'Smartphones, cases, chargers, accessories & more.',
+    slug: 'smartphones',
   },
   {
     id: 3,
     name: 'Food & Drinks',
-    category: 'Food & Drinks',
     image: '/products/food-drinks.png',
-    description: 'A selection of popular food and refreshing drinks for everyday needs.',
-    price: 12,
+    description: 'Food, snacks, beverages and everyday favorites.',
+    slug: 'food-drinks',
   },
   {
     id: 4,
-    name: 'Fashion Collection',
-    category: 'Fashion',
+    name: 'Fashion',
     image: '/products/fashion.png',
-    description: 'Modern fashion essentials combining comfort, style, and versatility.',
-    price: 35,
+    description: 'Clothing, shoes, bags, accessories and everyday style.',
+    slug: 'fashion',
   },
   {
     id: 5,
     name: 'Home & Living',
-    category: 'Home & Living',
     image: '/products/home-living.png',
-    description: 'Useful and stylish products to make your home more comfortable.',
-    price: 25,
+    description: 'Home essentials, decor, furniture and lifestyle products.',
+    slug: 'home-living',
   },
   {
     id: 6,
     name: 'Handmade Crafts',
-    category: 'Crafts',
     image: '/products/handmade-crafts.png',
-    description: 'Unique handmade creations crafted with care and creativity.',
-    price: 19,
+    description: 'Unique handmade creations, gifts, decor and artisan products.',
+    slug: 'handmade-crafts',
   },
 ]
 export default function App() {
@@ -120,27 +114,24 @@ export default function App() {
           </div>
 
           <div className="product-grid">
-            {sampleProducts.map((product) => (
-              <article className="product-card" key={product.id}>
-                <div className="product-image">
-  <img src={product.image} alt={product.name} />
-</div>
+{categories.map((category) => (
+  <article className="product-card" key={category.id}>
+    <div className="product-image">
+      <img src={category.image} alt={category.name} />
+    </div>
 
-                <div className="product-info">
-                  <span className="product-category">{product.category}</span>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
+    <div className="product-info">
+      <h3>{category.name}</h3>
+      <p>{category.description}</p>
 
-                  <div className="product-bottom">
-                    <strong>${product.price}.00</strong>
-
-                    <button onClick={() => addToCart(product)}>
-                      Add to Bag
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
+      <div className="product-bottom">
+        <button className="explore-category">
+          Explore Products →
+        </button>
+      </div>
+    </div>
+  </article>
+))}
           </div>
         </section>
 
