@@ -5,6 +5,7 @@ const sampleProducts = [
     id: 1,
     name: 'Wireless Headphones',
     category: 'Electronics',
+    image: '/products/electronics.png',
     description: 'Comfortable wireless headphones for music, work, and everyday use.',
     price: 49,
   },
@@ -12,6 +13,7 @@ const sampleProducts = [
     id: 2,
     name: 'Smartphone',
     category: 'Smartphones',
+    image: '/products/smartphone.png',
     description: 'Modern smartphone with a sleek design and essential everyday features.',
     price: 299,
   },
@@ -19,6 +21,7 @@ const sampleProducts = [
     id: 3,
     name: 'Food & Drinks',
     category: 'Food & Drinks',
+    image: '/products/food-drinks.png',
     description: 'A selection of popular food and refreshing drinks for everyday needs.',
     price: 12,
   },
@@ -26,6 +29,7 @@ const sampleProducts = [
     id: 4,
     name: 'Fashion Collection',
     category: 'Fashion',
+    image: '/products/fashion.png',
     description: 'Modern fashion essentials combining comfort, style, and versatility.',
     price: 35,
   },
@@ -33,6 +37,7 @@ const sampleProducts = [
     id: 5,
     name: 'Home & Living',
     category: 'Home & Living',
+    image: '/products/home-living.png',
     description: 'Useful and stylish products to make your home more comfortable.',
     price: 25,
   },
@@ -40,11 +45,11 @@ const sampleProducts = [
     id: 6,
     name: 'Handmade Crafts',
     category: 'Crafts',
+    image: '/products/handmade-crafts.png',
     description: 'Unique handmade creations crafted with care and creativity.',
     price: 19,
   },
 ]
-
 export default function App() {
   const [cart, setCart] = useState([])
 
@@ -118,10 +123,11 @@ export default function App() {
             {sampleProducts.map((product) => (
               <article className="product-card" key={product.id}>
                 <div className="product-image">
-                  <span>🐚</span>
-                </div>
+  <img src={product.image} alt={product.name} />
+</div>
 
                 <div className="product-info">
+                  <span className="product-category">{product.category}</span>
                   <h3>{product.name}</h3>
                   <p>{product.description}</p>
 
