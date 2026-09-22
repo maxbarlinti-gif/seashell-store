@@ -32,9 +32,12 @@ export default function App() {
     <div className="app">
       <header className="header">
         <div className="brand">
-          <span className="brand-mark">🐚</span>
-          <span>ARDAS ONG</span>
-        </div>
+  <img src="/ardas-logo.jpeg" alt="Ardas Ong Company" className="brand-logo" />
+  <div className="brand-text">
+    <span className="brand-name">ARDAS ONG</span>
+    <span className="brand-tagline">DISCOVER • SHOP • CONNECT</span>
+  </div>
+</div>
 
         <nav>
           <a href="#home">Home</a>
