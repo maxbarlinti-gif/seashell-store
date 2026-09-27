@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { supabase } from './supabase'
 import marketplaceHero from './marketplace-products.png'
 const categories = [
   {
@@ -47,6 +48,27 @@ const categories = [
 export default function App() {
   const [cart, setCart] = useState([])
 const [selectedCategory, setSelectedCategory] = useState(null)
+    const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+  const fetchProducts = async () => {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('active', true)
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Error loading products:', error)
+    } else {
+      setProducts(data || [])
+    }
+
+    setLoading(false)
+  }
+
+  fetchProducts()
+}, [])
   const addToCart = (product) => {
     setCart((current) => [...current, product])
   }
@@ -160,9 +182,50 @@ const [selectedCategory, setSelectedCategory] = useState(null)
         </p>
       </div>
 
-      <div className="category-products-placeholder">
-        <p>Products in this category will appear here.</p>
-      </div>
+     <div className="category-products-grid">
+  {loading ? (
+    <p>Loading products...</p>
+  ) : products.filter(
+      (product) => product.category === selectedCategory
+    ).length === 0 ? (
+    <p>No products available in this category yet.</p>
+  ) : (
+    products
+      .filter((product) => product.category === selectedCategory)
+      .map((product) => (
+        <div className="product-card" key={product.id}>
+          {product.image_url && (
+            <img src={product.image_url} alt={product.name} />
+          )}
+
+          <div className="product-card-content">
+            <h3>{product.name}</h3>
+
+            <p>{product.description}</p>
+
+            <div className="product-price">
+              {product.sale_price ? (
+                <>
+                  <span className="original-price">
+                    Rp {Number(product.price).toLocaleString("id-ID")}
+                  </span>
+                  <strong>
+                    Rp {Number(product.sale_price).toLocaleString("id-ID")}
+                  </strong>
+                </>
+              ) : (
+                <strong>
+                  Rp {Number(product.price).toLocaleString("id-ID")}
+                </strong>
+              )}
+            </div>
+
+            <p>Stock: {product.stock}</p>
+          </div>
+        </div>
+      ))
+  )}
+</div>
     </div>
   )}
 </section>
