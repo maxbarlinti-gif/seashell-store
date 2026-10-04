@@ -466,3 +466,16 @@ footer p {
   background: #163f3e;
   transform: translateY(-2px);
 }
+
+/* Category View Layout */
+.category-view {
+  padding: 60px 7% 80px;
+}
+
+.category-view .section-heading {
+  margin: 0 auto 30px;
+}
+
+.category-view .category-products-grid {
+  margin-top: 0;
+}
