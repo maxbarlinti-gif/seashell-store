@@ -80,7 +80,7 @@ const [selectedCategory, setSelectedCategory] = useState(null)
   <img src="/ardas-logo.jpeg" alt="Ardas Ong Company" className="brand-logo" />
   <div className="brand-text">
     <span className="brand-name">ARDAS ONG</span>
-    <span className="brand-tagline">DISCOVER • SHOP • CONNECT</span>
+    <span className="brand-tagline">WE SERVE YOU BETTER</span>
   </div>
 </div>
 
