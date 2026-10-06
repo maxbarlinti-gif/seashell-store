@@ -499,6 +499,21 @@ const submitSellerProduct = async () => {
             <p>Price: Rp {Number(product.price).toLocaleString('id-ID')}</p>
             <p>Stock: {product.stock}</p>
             <p>Status: {product.status}</p>
+            <div className="pending-product-actions">
+  <button
+    className="primary-button"
+    type="button"
+  >
+    Approve
+  </button>
+
+  <button
+    className="secondary-button"
+    type="button"
+  >
+    Reject
+  </button>
+</div>
           </div>
         ))}
       </div>
