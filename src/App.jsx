@@ -50,6 +50,16 @@ export default function App() {
 const [selectedCategory, setSelectedCategory] = useState(null)
     const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [sellerForm, setSellerForm] = useState({
+  product_name: '',
+  category: '',
+  description: '',
+  price: '',
+  sale_price: '',
+  stock: '',
+  weight_grams: '',
+  image_url: '',
+})
   useEffect(() => {
   const fetchProducts = async () => {
     const { data, error } = await supabase
@@ -72,7 +82,56 @@ const [selectedCategory, setSelectedCategory] = useState(null)
   const addToCart = (product) => {
     setCart((current) => [...current, product])
   }
+const submitSellerProduct = async () => {
+  if (
+    !sellerForm.product_name ||
+    !sellerForm.category ||
+    !sellerForm.price ||
+    !sellerForm.stock
+  ) {
+    alert('Please complete the required fields.')
+    return
+  }
 
+  const { error } = await supabase
+    .from('seller_products')
+    .insert([
+      {
+        product_name: sellerForm.product_name,
+        category: sellerForm.category,
+        description: sellerForm.description || null,
+        price: Number(sellerForm.price),
+        sale_price: sellerForm.sale_price
+          ? Number(sellerForm.sale_price)
+          : null,
+        stock: Number(sellerForm.stock),
+        weight_grams: sellerForm.weight_grams
+          ? Number(sellerForm.weight_grams)
+          : 0,
+        image_url: sellerForm.image_url || null,
+        status: 'pending',
+      },
+    ])
+
+  if (error) {
+    console.error('Error submitting seller product:', error)
+    alert('Failed to submit product. Please try again.')
+    return
+  }
+
+  alert('Product submitted successfully! It is now waiting for approval.')
+
+  setSellerForm({
+    product_name: '',
+    category: '',
+    description: '',
+    price: '',
+    sale_price: '',
+    stock: '',
+    weight_grams: '',
+    image_url: '',
+  })
+}
   return (
     <div className="app">
       <header className="header">
@@ -247,11 +306,26 @@ const [selectedCategory, setSelectedCategory] = useState(null)
     <h3>Submit Your Product</h3>
 
     <input
-      type="text"
-      placeholder="Product Name"
-    />
+  type="text"
+  placeholder="Product Name"
+  value={sellerForm.product_name}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      product_name: e.target.value,
+    })
+  }
+/>
 
-    <select defaultValue="">
+    <select
+  value={sellerForm.category}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      category: e.target.value,
+    })
+  }
+>
       <option value="" disabled>
         Select Category
       </option>
@@ -264,39 +338,84 @@ const [selectedCategory, setSelectedCategory] = useState(null)
       <option value="other">Other</option>
     </select>
 
-    <textarea
-      placeholder="Product Description"
-      rows="5"
-    />
+<textarea
+  placeholder="Product Description"
+  rows="5"
+  value={sellerForm.description}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      description: e.target.value,
+    })
+  }
+/>
 
-    <input
-      type="number"
-      placeholder="Price"
-    />
+<input
+  type="number"
+  placeholder="Price"
+  value={sellerForm.price}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      price: e.target.value,
+    })
+  }
+/>
 
-    <input
-      type="number"
-      placeholder="Sale Price (optional)"
-    />
+<input
+  type="number"
+  placeholder="Sale Price (optional)"
+  value={sellerForm.sale_price}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      sale_price: e.target.value,
+    })
+  }
+/>
 
-    <input
-      type="number"
-      placeholder="Stock"
-    />
+<input
+  type="number"
+  placeholder="Stock"
+  value={sellerForm.stock}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      stock: e.target.value,
+    })
+  }
+/>
 
-    <input
-      type="number"
-      placeholder="Weight (grams)"
-    />
+<input
+  type="number"
+  placeholder="Weight (grams)"
+  value={sellerForm.weight_grams}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      weight_grams: e.target.value,
+    })
+  }
+/>
 
-    <input
-      type="url"
-      placeholder="Product Image URL"
-    />
-
-    <button className="primary-button" type="button">
-      Submit Product
-    </button>
+<input
+  type="url"
+  placeholder="Product Image URL"
+  value={sellerForm.image_url}
+  onChange={(e) =>
+    setSellerForm({
+      ...sellerForm,
+      image_url: e.target.value,
+    })
+  }
+/>
+    <button
+  className="primary-button"
+  type="button"
+  onClick={submitSellerProduct}
+>
+  Submit Product
+</button>
   </div>
 </section>
       </main>
