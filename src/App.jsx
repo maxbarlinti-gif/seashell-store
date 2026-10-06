@@ -54,7 +54,7 @@ const [selectedCategory, setSelectedCategory] = useState(null)
 const [adminEmail, setAdminEmail] = useState('')
 const [adminPassword, setAdminPassword] = useState('')
 const [isAdmin, setIsAdmin] = useState(false)
-
+const [pendingProducts, setPendingProducts] = useState([])
 const [sellerForm, setSellerForm] = useState({
   product_name: '',
   category: '',
@@ -95,12 +95,27 @@ const [sellerForm, setSellerForm] = useState({
     return
   }
 
-  setIsAdmin(true)
-  alert('Admin login successful!')
+ setIsAdmin(true)
+await fetchPendingProducts()
+alert('Admin login successful!')
 }
   const addToCart = (product) => {
     setCart((current) => [...current, product])
   }
+ const fetchPendingProducts = async () => {
+  const { data, error } = await supabase
+    .from('seller_products')
+    .select('*')
+    .eq('status', 'pending')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Error loading pending products:', error)
+    return
+  }
+
+  setPendingProducts(data || [])
+} 
 const submitSellerProduct = async () => {
   if (
     !sellerForm.product_name ||
@@ -467,11 +482,29 @@ const submitSellerProduct = async () => {
         Login
       </button>
     </div>
-  ) : (
-    <div className="admin-welcome">
-      <p>Admin login successful.</p>
-    </div>
-  )}
+) : (
+  <div className="admin-welcome">
+    <p>Admin login successful.</p>
+
+    <h3>Pending Products</h3>
+
+    {pendingProducts.length === 0 ? (
+      <p>No pending products.</p>
+    ) : (
+      <div className="pending-products">
+        {pendingProducts.map((product) => (
+          <div className="pending-product-card" key={product.id}>
+            <h4>{product.product_name}</h4>
+            <p>Category: {product.category}</p>
+            <p>Price: Rp {Number(product.price).toLocaleString('id-ID')}</p>
+            <p>Stock: {product.stock}</p>
+            <p>Status: {product.status}</p>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
 </section>
       </main>
 
