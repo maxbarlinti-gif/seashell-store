@@ -142,7 +142,7 @@ const approveSellerProduct = async (product) => {
 
   if (insertError) {
     console.error('Error approving product:', insertError)
-    alert('Failed to approve product. Please try again.')
+    alert('Failed to approve product: ' + insertError.message)
     return
   }
 
