@@ -142,7 +142,17 @@ button {
   font-size: 14px;
   font-weight: 700;
 }
-
+.secondary-button {
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 4px;
+  background: #8b3a3a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
 .hero-art {
   min-height: 420px;
   display: flex;
