@@ -192,24 +192,25 @@ const [selectedCategory, setSelectedCategory] = useState(null)
   ) : (
     products
       .filter((product) => product.category === selectedCategory)
-      .map((product) => (
-        <div className="product-card" key={product.id}>
-          {product.image_url && (
-            <img src={product.image_url} alt={product.name} />
-          )}
+     .map((product) => (
+  <div className="product-card" key={product.id}>
+    {product.image_url && (
+      <img src={product.image_url} alt={product.name} />
+    )}
 
-<div className="product-card-content">
-  <h3>{product.name}</h3>
+    <div className="product-card-content">
+      <h3>{product.name}</h3>
 
-  <p>{product.description}</p>
+      <p>{product.description}</p>
 
-  <div className="product-bottom">
-    <button className="explore-category">
-      Explore Product →
-    </button>
+      <div className="product-bottom">
+        <button className="explore-category">
+          Explore Product →
+        </button>
+      </div>
+    </div>
   </div>
-</div>
-      ))
+))
   )}
 </div>
     </div>
