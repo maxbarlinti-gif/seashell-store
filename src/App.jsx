@@ -84,11 +84,12 @@ const [selectedCategory, setSelectedCategory] = useState(null)
   </div>
 </div>
 
-        <nav>
-          <a href="#home">Home</a>
-          <a href="#shop">Shop</a>
-          <a href="#about">About</a>
-        </nav>
+     <nav>
+  <a href="#home">Home</a>
+  <a href="#shop">Shop</a>
+  <a href="#about">About</a>
+  <a href="#sell">Sell With Us</a>
+</nav>
 
         <div className="cart-button">
           Bag ({cart.length})
@@ -229,6 +230,22 @@ const [selectedCategory, setSelectedCategory] = useState(null)
             is made with attention to detail and a love for
             nature-inspired design.
           </p>
+           </section>
+
+        <section className="sell-section" id="sell">
+          <div>
+            <p className="eyebrow">SELL WITH US</p>
+            <h2>Become a Seller</h2>
+          </div>
+
+          <p>
+            Have products to sell? Join Ardas Ong and introduce
+            your products to customers through our marketplace.
+          </p>
+
+          <button className="primary-button">
+            Submit Your Product
+          </button>
         </section>
       </main>
 
