@@ -49,8 +49,13 @@ export default function App() {
   const [cart, setCart] = useState([])
 const [selectedCategory, setSelectedCategory] = useState(null)
     const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [sellerForm, setSellerForm] = useState({
+ const [loading, setLoading] = useState(true)
+
+const [adminEmail, setAdminEmail] = useState('')
+const [adminPassword, setAdminPassword] = useState('')
+const [isAdmin, setIsAdmin] = useState(false)
+
+const [sellerForm, setSellerForm] = useState({
   product_name: '',
   category: '',
   description: '',
@@ -79,6 +84,20 @@ const [selectedCategory, setSelectedCategory] = useState(null)
 
   fetchProducts()
 }, [])
+  const loginAdmin = async () => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: adminEmail,
+    password: adminPassword,
+  })
+
+  if (error) {
+    alert('Login failed: ' + error.message)
+    return
+  }
+
+  setIsAdmin(true)
+  alert('Admin login successful!')
+}
   const addToCart = (product) => {
     setCart((current) => [...current, product])
   }
@@ -417,6 +436,42 @@ const submitSellerProduct = async () => {
   Submit Product
 </button>
   </div>
+</section>
+        <section className="admin-login-section" id="admin">
+  <div>
+    <p className="eyebrow">ADMIN</p>
+    <h2>Admin Login</h2>
+  </div>
+
+  {!isAdmin ? (
+    <div className="admin-login-form">
+      <input
+        type="email"
+        placeholder="Admin Email"
+        value={adminEmail}
+        onChange={(e) => setAdminEmail(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Admin Password"
+        value={adminPassword}
+        onChange={(e) => setAdminPassword(e.target.value)}
+      />
+
+      <button
+        className="primary-button"
+        type="button"
+        onClick={loginAdmin}
+      >
+        Login
+      </button>
+    </div>
+  ) : (
+    <div className="admin-welcome">
+      <p>Admin login successful.</p>
+    </div>
+  )}
 </section>
       </main>
 
