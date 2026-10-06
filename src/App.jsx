@@ -102,7 +102,7 @@ alert('Admin login successful!')
   const addToCart = (product) => {
     setCart((current) => [...current, product])
   }
- const fetchPendingProducts = async () => {
+const fetchPendingProducts = async () => {
   const { data, error } = await supabase
     .from('seller_products')
     .select('*')
@@ -115,7 +115,51 @@ alert('Admin login successful!')
   }
 
   setPendingProducts(data || [])
-} 
+}
+
+const approveSellerProduct = async (product) => {
+  const { error: insertError } = await supabase
+    .from('products')
+    .insert([
+      {
+        name: product.product_name,
+        type: 'physical',
+        description: product.description,
+        price: Number(product.price),
+        sale_price: product.sale_price
+          ? Number(product.sale_price)
+          : null,
+        stock: Number(product.stock),
+        weight_grams: Number(product.weight_grams),
+        image_url: product.image_url,
+        digital_path: null,
+        flash_sale: false,
+        flash_ends_at: null,
+        active: true,
+        category: product.category,
+      },
+    ])
+
+  if (insertError) {
+    console.error('Error approving product:', insertError)
+    alert('Failed to approve product. Please try again.')
+    return
+  }
+
+  const { error: updateError } = await supabase
+    .from('seller_products')
+    .update({ status: 'approved' })
+    .eq('id', product.id)
+
+  if (updateError) {
+    console.error('Error updating seller product:', updateError)
+    alert('Product was added, but status could not be updated.')
+    return
+  }
+
+  alert('Product approved successfully!')
+  await fetchPendingProducts()
+}
 const submitSellerProduct = async () => {
   if (
     !sellerForm.product_name ||
@@ -500,12 +544,13 @@ const submitSellerProduct = async () => {
             <p>Stock: {product.stock}</p>
             <p>Status: {product.status}</p>
             <div className="pending-product-actions">
-  <button
-    className="primary-button"
-    type="button"
-  >
-    Approve
-  </button>
+ <button
+  className="primary-button"
+  type="button"
+  onClick={() => approveSellerProduct(product)}
+>
+  Approve
+</button>
 
   <button
     className="secondary-button"
