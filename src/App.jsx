@@ -198,31 +198,17 @@ const [selectedCategory, setSelectedCategory] = useState(null)
             <img src={product.image_url} alt={product.name} />
           )}
 
-          <div className="product-card-content">
-            <h3>{product.name}</h3>
+<div className="product-card-content">
+  <h3>{product.name}</h3>
 
-            <p>{product.description}</p>
+  <p>{product.description}</p>
 
-            <div className="product-price">
-              {product.sale_price ? (
-                <>
-                  <span className="original-price">
-                    Rp {Number(product.price).toLocaleString("id-ID")}
-                  </span>
-                  <strong>
-                    Rp {Number(product.sale_price).toLocaleString("id-ID")}
-                  </strong>
-                </>
-              ) : (
-                <strong>
-                  Rp {Number(product.price).toLocaleString("id-ID")}
-                </strong>
-              )}
-            </div>
-
-            <p>Stock: {product.stock}</p>
-          </div>
-        </div>
+  <div className="product-bottom">
+    <button className="explore-category">
+      Explore Product →
+    </button>
+  </div>
+</div>
       ))
   )}
 </div>
