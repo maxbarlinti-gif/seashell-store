@@ -232,21 +232,73 @@ const [selectedCategory, setSelectedCategory] = useState(null)
           </p>
            </section>
 
-        <section className="sell-section" id="sell">
-          <div>
-            <p className="eyebrow">SELL WITH US</p>
-            <h2>Become a Seller</h2>
-          </div>
+       <section className="sell-section" id="sell">
+  <div>
+    <p className="eyebrow">SELL WITH US</p>
+    <h2>Become a Seller</h2>
+  </div>
 
-          <p>
-            Have products to sell? Join Ardas Ong and introduce
-            your products to customers through our marketplace.
-          </p>
+  <p>
+    Have products to sell? Join Ardas Ong and introduce
+    your products to customers through our marketplace.
+  </p>
 
-          <button className="primary-button">
-            Submit Your Product
-          </button>
-        </section>
+  <div className="seller-form">
+    <h3>Submit Your Product</h3>
+
+    <input
+      type="text"
+      placeholder="Product Name"
+    />
+
+    <select defaultValue="">
+      <option value="" disabled>
+        Select Category
+      </option>
+      <option value="electronics">Electronics</option>
+      <option value="smartphones">Smartphones</option>
+      <option value="food">Food & Drinks</option>
+      <option value="fashion">Fashion</option>
+      <option value="home-living">Home & Living</option>
+      <option value="handmade">Handmade</option>
+      <option value="other">Other</option>
+    </select>
+
+    <textarea
+      placeholder="Product Description"
+      rows="5"
+    />
+
+    <input
+      type="number"
+      placeholder="Price"
+    />
+
+    <input
+      type="number"
+      placeholder="Sale Price (optional)"
+    />
+
+    <input
+      type="number"
+      placeholder="Stock"
+    />
+
+    <input
+      type="number"
+      placeholder="Weight (grams)"
+    />
+
+    <input
+      type="url"
+      placeholder="Product Image URL"
+    />
+
+    <button className="primary-button" type="button">
+      Submit Product
+    </button>
+  </div>
+</section>
       </main>
 
       <footer>
