@@ -341,11 +341,17 @@ const submitSellerProduct = async () => {
 
       <p>{product.description}</p>
 
-      <div className="product-bottom">
-        <button className="explore-category">
-          Explore Product →
-        </button>
-      </div>
+   
+<div className="product-bottom">
+  <button
+    className="explore-category"
+    onClick={() => {
+      setSelectedProduct(product);
+    }}
+  >
+    Explore Product →
+  </button>
+</div>
     </div>
   </div>
 ))
