@@ -48,6 +48,7 @@ const categories = [
 export default function App() {
   const [cart, setCart] = useState([])
 const [selectedCategory, setSelectedCategory] = useState(null)
+   const [selectedProduct, setSelectedProduct] = useState(null)
     const [products, setProducts] = useState([])
  const [loading, setLoading] = useState(true)
 
@@ -264,7 +265,43 @@ const submitSellerProduct = async () => {
         </section>
 
 <section className="shop-section" id="shop">
-  {!selectedCategory ? (
+{selectedProduct ? (
+  <div className="product-detail-view">
+    <button
+      className="back-category"
+      onClick={() => setSelectedProduct(null)}
+    >
+      ← Back to Products
+    </button>
+
+    {selectedProduct.image_url && (
+      <img
+        src={selectedProduct.image_url}
+        alt={selectedProduct.name}
+      />
+    )}
+
+    <div className="product-detail-content">
+      <h2>{selectedProduct.name}</h2>
+      <p>{selectedProduct.description}</p>
+
+      {selectedProduct.sale_price && Number(selectedProduct.sale_price) < Number(selectedProduct.price) ? (
+        <>
+          <p className="original-price">
+            Rp {Number(selectedProduct.price).toLocaleString("id-ID")}
+          </p>
+          <h3>
+            Rp {Number(selectedProduct.sale_price).toLocaleString("id-ID")}
+          </h3>
+        </>
+      ) : (
+        <h3>
+          Rp {Number(selectedProduct.price).toLocaleString("id-ID")}
+        </h3>
+      )}
+    </div>
+  </div>
+) : !selectedCategory ? (
     <>
       <div className="section-heading">
         <p className="eyebrow">SHOP BY CATEGORY</p>
