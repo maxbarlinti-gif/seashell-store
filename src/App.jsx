@@ -49,14 +49,16 @@ export default function App() {
   const [cart, setCart] = useState([])
 const [selectedCategory, setSelectedCategory] = useState(null)
    const [selectedProduct, setSelectedProduct] = useState(null)
-  useEffect(() => {
+ 
+useEffect(() => {
   if (selectedProduct) {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+    document.getElementById('shop')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     })
   }
 }, [selectedProduct])
+
     const [products, setProducts] = useState([])
  const [loading, setLoading] = useState(true)
 
